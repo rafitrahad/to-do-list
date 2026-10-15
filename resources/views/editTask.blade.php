@@ -1,84 +1,136 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{asset('style/main.css')}}">
+    <title>Edit Todo</title>
 
-    <!-- Icons -->
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('style/main.css') }}">
+
+    <!-- Font Awesome -->
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     >
 </head>
+
 <body>
 
-    <div class="container">
+    <div class="todo-container">
 
         <!-- Page Header -->
         <div class="page-header">
             <div>
-                <h1>Todo List</h1>
+                <h1>
+                    <i class="fa-solid fa-list-check"></i>
+                    Todo List
+                </h1>
                 <p>Manage your tasks easily</p>
             </div>
         </div>
 
-        <!-- Todo Form -->
-        <div class="card">
-            <div class="card-header">
-                <h2>Add Todo</h2>
+        <!-- Edit Todo Card -->
+        <div class="todo-card">
+
+            <div class="todo-card-header">
+                <h2>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    Edit Todo
+                </h2>
+                <p>Update your task details below</p>
             </div>
 
-            <form class="todo-form" action="{{ route('tasks.update', $task->id) }}" method="POST">
+            <!-- Existing form functionality preserved -->
+            <form
+                class="todo-form"
+                action="{{ route('tasks.update', $task->id) }}"
+                method="POST"
+            >
                 @csrf
+
                 <!-- Title -->
                 <div class="form-group">
-                    <label for="title">Title</label>
+                    <label for="title">
+                        <i class="fa-solid fa-heading"></i>
+                        Task Title
+                    </label>
+
                     <input
                         type="text"
                         id="title"
                         name="title"
-                        placeholder="Enter todo title"
+                        class="form-control"
+                        placeholder="Enter task title"
                         value="{{ $task->title }}"
+                        required
                     >
                 </div>
 
                 <!-- Description -->
                 <div class="form-group">
-                    <label for="description">Description</label>
+                    <label for="description">
+                        <i class="fa-solid fa-align-left"></i>
+                        Description
+                    </label>
+
                     <textarea
                         id="description"
                         name="description"
-                        rows="4"
-                        placeholder="Enter todo description"
+                        class="form-control"
+                        rows="5"
+                        placeholder="Enter task description"
                     >{{ $task->description }}</textarea>
                 </div>
 
                 <!-- Status -->
                 <div class="form-group">
-                    <label for="status">Status</label>
-                    <select id="status" name="status">
-                        <option value="{{ $task->status }}">{{ $task->status }}</option>
+                    <label for="status">
+                        <i class="fa-solid fa-spinner"></i>
+                        Task Status
+                    </label>
+
+                    <select
+                        name="status"
+                        id="status"
+                        class="form-select"
+                    >
+                        <option value="{{ $task->status }}">
+                            {{ $task->status }}
+                        </option>
+
                         <option value="pending">Pending</option>
                         <option value="in-progress">In Progress</option>
                         <option value="completed">Completed</option>
                     </select>
                 </div>
 
-                <!-- Submit -->
+                <!-- Buttons -->
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa-solid fa-plus"></i>
-                        Update
+
+                    <button type="submit" class="todo-btn todo-btn-primary">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Update Task
                     </button>
+
+                    <a href="{{ route('tasks.index') }}" class="todo-btn todo-btn-secondary">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Back to Tasks
+                    </a>
+
                 </div>
 
             </form>
+
         </div>
+
     </div>
 
 </body>

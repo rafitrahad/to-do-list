@@ -10,7 +10,7 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('searchValue');
-        $tasks = Task::where('title', 'like', '%' . $search . '%')->get();
+        $tasks = Task::where('title', 'like', '%' . $search . '%')->paginate(5);
         return view('index', compact('tasks'));
     }
 
@@ -59,5 +59,19 @@ class TaskController extends Controller
         $tasks = Task::where('title', 'like', '%' . $searchTerm . '%')->get();
 
         return view('taskView', compact('tasks'));
+    }
+
+    public function restoreView()
+    {
+        $tasks = Task::onlyTrashed()->paginate(5);
+        return view('taskView', compact('tasks'));
+    }
+    public function restoreTask($id)
+    {
+        // dd("restore route");
+        $task = Task::withTrashed()->findOrFail($id);
+        $task->restore();
+
+        return redirect()->route('tasks.index')->with('success', 'Task restored successfully.');
     }
 }

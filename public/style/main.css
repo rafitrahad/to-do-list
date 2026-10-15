@@ -1,6 +1,6 @@
-/* =========================
-   Reset
-========================= */
+/* ========================================
+   1. RESET
+======================================== */
 
 * {
     margin: 0;
@@ -9,31 +9,35 @@
 }
 
 
-/* =========================
-   Body
-========================= */
+/* ========================================
+   2. BODY
+======================================== */
 
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f5f7fb;
     color: #1f2937;
     padding: 40px 20px;
+    line-height: 1.5;
 }
 
 
-/* =========================
-   Container
-========================= */
+/* ========================================
+   3. MAIN CONTAINER
+   Uses todo-container to avoid Bootstrap
+   .container conflicts.
+======================================== */
 
-.container {
+.todo-container {
+    width: 100%;
     max-width: 1100px;
     margin: 0 auto;
 }
 
 
-/* =========================
-   Page Header
-========================= */
+/* ========================================
+   4. PAGE HEADER
+======================================== */
 
 .page-header {
     margin-bottom: 25px;
@@ -41,7 +45,9 @@ body {
 
 .page-header h1 {
     font-size: 28px;
+    font-weight: 700;
     margin-bottom: 6px;
+    color: #111827;
 }
 
 .page-header p {
@@ -50,31 +56,37 @@ body {
 }
 
 
-/* =========================
-   Card
-========================= */
+/* ========================================
+   5. CARD
+   Uses todo-card to avoid Bootstrap's
+   .card styles.
+======================================== */
 
-.card {
+.todo-card {
     background-color: #ffffff;
     border: 1px solid #e5e7eb;
     border-radius: 10px;
     margin-bottom: 25px;
     overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
 }
 
-.card-header {
+.todo-card-header {
     padding: 20px;
     border-bottom: 1px solid #e5e7eb;
+    background-color: #ffffff;
 }
 
-.card-header h2 {
+.todo-card-header h2 {
     font-size: 18px;
+    font-weight: 600;
+    margin: 0;
 }
 
 
-/* =========================
-   Form
-========================= */
+/* ========================================
+   6. TODO FORM
+======================================== */
 
 .todo-form {
     padding: 20px;
@@ -95,60 +107,105 @@ body {
 .form-group input,
 .form-group textarea,
 .form-group select {
+    display: block;
     width: 100%;
     padding: 11px 13px;
     border: 1px solid #d1d5db;
     border-radius: 6px;
     font-size: 14px;
     font-family: inherit;
+    color: #1f2937;
+    background-color: #ffffff;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input {
+    height: 42px;
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-group select {
+    height: 42px;
+    cursor: pointer;
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
     border-color: #2563eb;
-}
-
-.form-group textarea {
-    resize: vertical;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 
-/* =========================
-   Button
-========================= */
+/* ========================================
+   7. FORM ACTIONS
+======================================== */
 
 .form-actions {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
 }
 
-.btn {
-    border: none;
+
+/* ========================================
+   8. CUSTOM BUTTONS
+   Avoid Bootstrap .btn conflicts.
+======================================== */
+
+.todo-btn {
+    min-height: 40px;
+    padding: 10px 16px;
+    border: 1px solid transparent;
     border-radius: 6px;
-    padding: 11px 18px;
     font-size: 14px;
+    font-family: inherit;
+    font-weight: 500;
+    text-decoration: none;
     cursor: pointer;
+
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
+
+    white-space: nowrap;
+    transition: background-color 0.2s, border-color 0.2s;
 }
 
-.btn-primary {
+.todo-btn-primary {
     background-color: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+}
+
+.todo-btn-primary:hover {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
     color: #ffffff;
 }
 
-.btn-primary:hover {
-    background-color: #1d4ed8;
+.todo-btn-secondary {
+    background-color: #ffffff;
+    color: #374151;
+    border-color: #d1d5db;
+}
+
+.todo-btn-secondary:hover {
+    background-color: #f9fafb;
+    color: #111827;
 }
 
 
-/* =========================
-   List Header
-========================= */
+/* ========================================
+   9. LIST HEADER
+======================================== */
 
 .list-header {
     padding: 20px;
@@ -159,105 +216,170 @@ body {
     border-bottom: 1px solid #e5e7eb;
 }
 
+.list-header>div:first-child {
+    min-width: 0;
+}
+
 .list-header h2 {
     font-size: 18px;
+    font-weight: 600;
     margin-bottom: 5px;
+    color: #111827;
 }
 
 .list-header p {
     font-size: 13px;
     color: #6b7280;
+    margin: 0;
 }
 
 
-/* =========================
-   Search
-========================= */
+/* ========================================
+   10. SEARCH
+======================================== */
 
 .search-box {
-    width: 280px;
-    position: relative;
+    width: 380px;
+    max-width: 100%;
+    flex-shrink: 0;
 }
 
-.search-box i {
-    position: absolute;
-    left: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #9ca3af;
-    font-size: 14px;
+.search-box form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
 }
 
 .search-box input {
+    flex: 1;
+    min-width: 0;
     width: 100%;
     height: 40px;
-    padding: 0 14px 0 38px;
+    padding: 0 12px;
     border: 1px solid #d1d5db;
     border-radius: 6px;
     outline: none;
     font-size: 14px;
+    font-family: inherit;
+    background-color: #ffffff;
+    color: #1f2937;
 }
 
 .search-box input:focus {
     border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.search-btn {
+    flex-shrink: 0;
+    height: 40px;
+    padding: 0 15px;
+    border: 1px solid #2563eb;
+    border-radius: 6px;
+    background-color: #2563eb;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    white-space: nowrap;
+    transition: background-color 0.2s;
+}
+
+.search-btn:hover {
+    background-color: #1d4ed8;
 }
 
 
-/* =========================
-   Table
-========================= */
+/* ========================================
+   11. RESTORE BUTTON
+======================================== */
+
+.restore-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+
+/* ========================================
+   12. TABLE
+======================================== */
 
 .table-wrapper {
     width: 100%;
     overflow-x: auto;
 }
 
-table {
+.todo-table {
     width: 100%;
     border-collapse: collapse;
+    margin: 0;
+    background-color: #ffffff;
 }
 
-thead {
+.todo-table thead {
     background-color: #f9fafb;
 }
 
-th {
+.todo-table th {
     padding: 14px 20px;
     text-align: left;
     font-size: 13px;
     font-weight: 600;
     color: #6b7280;
     border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
 }
 
-td {
+.todo-table td {
     padding: 15px 20px;
     font-size: 14px;
+    color: #374151;
     border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
 }
 
-tbody tr:last-child td {
+.todo-table tbody tr:last-child td {
     border-bottom: none;
 }
 
-tbody tr:hover {
+.todo-table tbody tr:hover {
     background-color: #f9fafb;
 }
 
+.todo-table th:first-child,
+.todo-table td:first-child {
+    width: 80px;
+}
 
-/* =========================
-   Todo Title
-========================= */
+.todo-table th:last-child,
+.todo-table td:last-child {
+    width: 140px;
+}
+
+
+/* ========================================
+   13. TODO TITLE
+======================================== */
 
 .todo-title {
     font-weight: 500;
     color: #111827;
+    overflow-wrap: anywhere;
 }
 
 
-/* =========================
-   Status
-========================= */
+/* ========================================
+   14. STATUS BADGES
+======================================== */
 
 .status {
     display: inline-block;
@@ -265,6 +387,7 @@ tbody tr:hover {
     border-radius: 20px;
     font-size: 12px;
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .status-completed {
@@ -282,10 +405,15 @@ tbody tr:hover {
     color: #92400e;
 }
 
+.status-default {
+    background-color: #f3f4f6;
+    color: #374151;
+}
 
-/* =========================
-   Action Buttons
-========================= */
+
+/* ========================================
+   15. ACTION BUTTONS
+======================================== */
 
 .action-buttons {
     display: flex;
@@ -293,17 +421,25 @@ tbody tr:hover {
     gap: 8px;
 }
 
+.action-buttons form {
+    display: inline-flex;
+    margin: 0;
+}
+
 .action-btn {
-    width: 34px;
-    height: 34px;
+    width: 35px;
+    height: 35px;
+    padding: 0;
     border: 1px solid #e5e7eb;
     background-color: #ffffff;
     border-radius: 6px;
     cursor: pointer;
-    display: flex;
+
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s;
+
+    transition: background-color 0.2s, border-color 0.2s;
 }
 
 .action-btn i {
@@ -329,9 +465,50 @@ tbody tr:hover {
 }
 
 
-/* =========================
-   Responsive
-========================= */
+/* ========================================
+   16. EMPTY RESULTS
+======================================== */
+
+.empty-results {
+    padding: 35px 20px !important;
+    text-align: center;
+    color: #6b7280 !important;
+}
+
+
+/* ========================================
+   17. PAGINATION
+======================================== */
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 0;
+    border-top: 1px solid #e5e7eb;
+    overflow-x: auto;
+}
+
+.pagination-container nav {
+    max-width: 100%;
+}
+
+.pagination-container .pagination {
+    margin: 0;
+    flex-wrap: wrap;
+    gap: 3px;
+}
+
+.pagination-container .page-link {
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+
+/* ========================================
+   18. RESPONSIVE DESIGN
+======================================== */
 
 @media (max-width: 768px) {
 
@@ -339,20 +516,68 @@ tbody tr:hover {
         padding: 20px 15px;
     }
 
+    .page-header h1 {
+        font-size: 25px;
+    }
+
     .list-header {
         flex-direction: column;
         align-items: stretch;
+        gap: 15px;
     }
 
     .search-box {
         width: 100%;
     }
 
-    .table-wrapper {
-        overflow-x: auto;
+    .restore-container {
+        padding: 12px 15px;
     }
 
-    table {
+    .todo-table {
         min-width: 600px;
     }
+
+    .pagination-container {
+        justify-content: flex-start;
+        padding: 15px;
+    }
+}
+
+
+@media (max-width: 400px) {
+
+    .todo-form {
+        padding: 15px;
+    }
+
+    .todo-card-header,
+    .list-header {
+        padding: 15px;
+    }
+
+    .search-box form {
+        gap: 5px;
+    }
+
+    .search-btn {
+        padding: 0 10px;
+    }
+
+    .search-btn i {
+        display: none;
+    }
+
+    .todo-btn {
+        padding: 9px 12px;
+    }
+}
+
+/* Hide pagination information text */
+.pagination-container nav p {
+    display: none !important;
+}
+
+.pagination-container nav div:first-child {
+    display: none !important;
 }
